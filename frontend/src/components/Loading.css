@@ -1,0 +1,28 @@
+.loader {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.loader_dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #e8e7e7;
+    opacity: 0.5;
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: scale-up 1000ms var(--d) linear infinite;
+}
+
+@keyframes scale-up {
+    25% {
+        scale: 2;
+        opacity: 1;
+    }
+
+    50% {
+        scale: 1;
+    }
+}

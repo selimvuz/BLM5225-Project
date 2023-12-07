@@ -1,10 +1,16 @@
 import './App.css';
 import Loader from './components/Loading';
+import NavigationBar from './components/NavigationBar';
+import DBTable from './components/Table';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
       <Loader />
+      <NavigationBar />
+      <DBTable />
     </div>
   );
 }

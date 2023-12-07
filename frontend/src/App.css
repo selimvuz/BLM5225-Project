@@ -1,3 +1,12 @@
+#root {
+  font-family: 'Work Sans', sans-serif !important;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  background-color: #091442;
+}
+
 .App {
   text-align: center;
   background-color: #091442;

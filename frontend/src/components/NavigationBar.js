@@ -10,7 +10,7 @@ function NavigationBar() {
     return (
         <Navbar expand="lg" className="bs-body-color">
             <Container fluid>
-                <Navbar.Brand href="#" className='text-light'>Veri Tabanı Sistemi</Navbar.Brand>
+                <Navbar.Brand href="#" className='text-dark'>Veri Tabanı Sistemi</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -18,8 +18,8 @@ function NavigationBar() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action1" className='text-light'>Ana Sayfa</Nav.Link>
-                        <Nav.Link href="#action2" className='text-light'>Yeni Veri</Nav.Link>
+                        <Nav.Link href="#action1" className='text-dark'>Ana Sayfa</Nav.Link>
+                        <Nav.Link href="#action2" className='text-dark'>Yeni Veri</Nav.Link>
                         <NavDropdown style={{ color: 'white' }} title="Kullanıcı" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action3">Giriş</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">
@@ -30,7 +30,7 @@ function NavigationBar() {
                                 Profil
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#" disabled className='text-light'>
+                        <Nav.Link href="#" disabled className='text-dark'>
                             Proje Hakkında
                         </Nav.Link>
                     </Nav>

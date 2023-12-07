@@ -2,8 +2,8 @@ import Table from 'react-bootstrap/Table';
 
 function DBTable() {
     return (
-        <div>
-            <Table class="table table-hover" responsive="sm">
+        <div style={{ margin: '40px 30em 40px 30em' }}>
+            <Table class="table table-hover table-dark" responsive="sm" style={{ marginBottom: "50px" }}>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -15,7 +15,7 @@ function DBTable() {
                         <th>Table heading</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-light">
                     <tr>
                         <td>1</td>
                         <td>Table cell</td>
@@ -45,7 +45,7 @@ function DBTable() {
                     </tr>
                 </tbody>
             </Table>
-            <Table class="table table-hover" responsive="md">
+            <Table class="table table-hover table-dark" responsive="md" style={{ marginBottom: "50px" }}>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -57,7 +57,7 @@ function DBTable() {
                         <th>Table heading</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-light">
                     <tr>
                         <td>1</td>
                         <td>Table cell</td>
@@ -87,7 +87,7 @@ function DBTable() {
                     </tr>
                 </tbody>
             </Table>
-            <Table class="table table-hover" responsive="lg">
+            <Table class="table table-hover table-dark" responsive="lg" style={{ marginBottom: "50px" }}>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -99,7 +99,7 @@ function DBTable() {
                         <th>Table heading</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-light">
                     <tr>
                         <td>1</td>
                         <td>Table cell</td>
@@ -129,7 +129,7 @@ function DBTable() {
                     </tr>
                 </tbody>
             </Table>
-            <Table class="table table-hover" responsive="xl">
+            <Table class="table table-hover table-dark" responsive="xl" style={{ marginBottom: "50px" }}>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -141,7 +141,7 @@ function DBTable() {
                         <th>Table heading</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-light">
                     <tr>
                         <td>1</td>
                         <td>Table cell</td>

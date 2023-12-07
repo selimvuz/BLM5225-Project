@@ -1,3 +1,7 @@
 .dropdown-toggle.nav-link {
     color: white !important;
 }
+
+.bs-body-color.navbar.navbar-expand-lg.navbar-light {
+    background-color: #6F2CF6 !important;
+}

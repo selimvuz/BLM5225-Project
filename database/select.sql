@@ -1,1 +1,1 @@
-SELECT VIN, ModelID, DealerID, CustomerID FROM Car;
+SELECT * FROM Brand;

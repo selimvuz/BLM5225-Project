@@ -2,12 +2,12 @@ const express = require('express');
 const sqlite3 = require('sqlite3');
 const cors = require('cors');
 const app = express();
-const port = 3001; // Choose a suitable port
+const port = 3001;
 
 app.use(cors()); // Enable CORS for all routes
 
-// Connect to your SQLite database (replace 'your-database.db' with your actual database file)
-const db = new sqlite3.Database('../database/car_db.db');
+// Connect to your SQLite database
+const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com/selimvuz/BLM5225-Project/database/car.db');
 
 // Define an API endpoint to fetch data
 app.get('/api/data1', (req, res) => {

@@ -11,7 +11,7 @@ const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com
 
 // Define an API endpoint to fetch data
 app.get('/api/data1', (req, res) => {
-    const query = 'SELECT Brand.BrandID, Brand.BrandName, Model.ModelID, Model.ModelName FROM Brand, Model WHERE Brand.BrandID = Model.BrandID;';
+    const query = 'SELECT Model.ModelID, Model.ModelName, Brand.BrandID, Brand.BrandName FROM Brand, Model WHERE Brand.BrandID = Model.BrandID ORDER BY Brand.BrandID;';
 
     // Execute the query
     db.all(query, (err, rows) => {

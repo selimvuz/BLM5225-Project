@@ -9,8 +9,7 @@ DELETE FROM Customer;
 DELETE FROM Dealer;
 DELETE FROM Model;
 DELETE FROM Brand;
-DELETE FROM
-Option;
+DELETE FROM Option;
 
 -- Enable foreign key checks again
 PRAGMA foreign_keys = ON;

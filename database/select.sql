@@ -1,1 +1,1 @@
-SELECT * FROM Brand;
+SELECT * FROM Car;

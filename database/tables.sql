@@ -49,3 +49,9 @@ CREATE TABLE CarOption
     PRIMARY KEY (CarID, OptionID),
     FOREIGN KEY (CarID) REFERENCES Car(VIN)
 );
+
+CREATE TABLE users
+(
+    email VARCHAR(255),
+    password VARCHAR(255)
+);

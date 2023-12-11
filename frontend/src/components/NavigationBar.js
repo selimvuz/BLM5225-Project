@@ -25,6 +25,7 @@ function NavigationBar() {
         };
         setLoginBoxPosition(position);
         setShowLoginBox(!showLoginBox);
+        setShowRegisterBox(false);
     };
 
     const handleLoginClickRegister = (e) => {
@@ -37,7 +38,7 @@ function NavigationBar() {
         };
         setRegisterBoxPosition(position);
         setShowRegisterBox(!showRegisterBox);
-
+        setShowLoginBox(false);
     }
 
     useEffect(() => {

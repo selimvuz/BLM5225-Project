@@ -17,7 +17,7 @@ function DBTable() {
 
     const fetchDataFromServer1 = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/data1');
+            const response = await fetch('http://localhost:3001/database/api/data1');
             const data = await response.json();
             setTableData(data);
         } catch (error) {
@@ -27,7 +27,7 @@ function DBTable() {
 
     const fetchDataFromServer2 = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/data2');
+            const response = await fetch('http://localhost:3001/database/api/data2');
             const data = await response.json();
             setTableDataTwo(data);
         } catch (error) {
@@ -37,7 +37,7 @@ function DBTable() {
 
     const fetchDataFromServer3 = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/data3');
+            const response = await fetch('http://localhost:3001/database/api/data3');
             const data = await response.json();
             setTableDataThree(data);
         } catch (error) {
@@ -47,7 +47,7 @@ function DBTable() {
 
     const fetchDataFromServer4 = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/data4');
+            const response = await fetch('http://localhost:3001/database/api/data4');
             const data = await response.json();
             setTableDataFour(data);
         } catch (error) {

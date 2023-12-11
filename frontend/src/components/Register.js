@@ -1,12 +1,15 @@
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import React, { useState } from 'react';
 import "./Register.css";
 
 function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [registerStatus, setRegisterStatus] = useState(null);
 
-    const handleRegister = async () => {
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
         try {
             const response = await fetch('http://localhost:3001/auth/register', {
                 method: 'POST',
@@ -17,20 +20,29 @@ function Register() {
             });
 
             if (response.ok) {
-                // Registration successful, you may want to redirect or show a success message
-                console.log('Registration successful');
+                // Login successful
+                setRegisterStatus({ type: 'success', message: 'Kayıt başarılı' });
+
+                // You may want to redirect or perform additional actions here
             } else {
-                // Registration failed, handle errors
-                console.error('Registration failed');
+                // Login failed
+                setRegisterStatus({ type: 'warning', message: 'Kayıt başarısız' });
             }
         } catch (error) {
-            console.error('Error during registration:', error);
+            console.error('Giriş sırasında hata:', error);
+            setRegisterStatus({ type: 'warning', message: 'Bir şeyler ters gitti.' });
         }
     };
+
     return (
         <div>
             <div className="register-overlay" onClick={(e) => e.stopPropagation()}>
                 <div className="register-box">
+                    {registerStatus && (
+                        <Alert variant={registerStatus.type} onClose={() => setRegisterStatus(null)} dismissible>
+                            {registerStatus.message}
+                        </Alert>
+                    )}
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email</Form.Label>

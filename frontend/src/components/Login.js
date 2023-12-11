@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import "./Login.css";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginStatus, setLoginStatus] = useState(null);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,14 +20,17 @@ function Login() {
             });
 
             if (response.ok) {
-                // Login successful, you may want to redirect or perform additional actions
-                console.log('Login successful');
+                // Login successful
+                setLoginStatus({ type: 'success', message: 'Giriş başarılı' });
+
+                // You may want to redirect or perform additional actions here
             } else {
-                // Login failed, handle errors
-                console.error('Login failed');
+                // Login failed
+                setLoginStatus({ type: 'warning', message: 'Giriş başarısız' });
             }
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error('Giriş sırasında hata:', error);
+            setLoginStatus({ type: 'warning', message: 'Bir şeyler ters gitti.' });
         }
     };
 
@@ -34,6 +38,11 @@ function Login() {
         <div>
             <div className="login-overlay" onClick={(e) => e.stopPropagation()}>
                 <div className="login-box">
+                    {loginStatus && (
+                        <Alert variant={loginStatus.type} onClose={() => setLoginStatus(null)} dismissible>
+                            {loginStatus.message}
+                        </Alert>
+                    )}
                     <Form onSubmit={handleLogin}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email</Form.Label>

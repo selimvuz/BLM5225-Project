@@ -17,6 +17,12 @@
     margin-left: 20px;
 }
 
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
 @media (min-width: 1270px) and (max-width: 1921vw) {
     .login-overlay {
         width: 400px;

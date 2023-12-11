@@ -52,6 +52,6 @@ CREATE TABLE CarOption
 
 CREATE TABLE users
 (
-    email VARCHAR(255),
+    email VARCHAR(255) PRIMARY KEY UNIQUE,
     password VARCHAR(255)
 );

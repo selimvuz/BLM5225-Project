@@ -1,9 +1,9 @@
 .login-overlay {
-    width: 400px;
+    width: 15vw;
 }
 
 .login-box {
-    width: 400px;
+    width: 15vw;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -15,4 +15,34 @@
 .checkB {
     text-align: left;
     margin-left: 20px;
+}
+
+@media (min-width: 1270px) and (max-width: 1921vw) {
+    .login-overlay {
+        width: 400px;
+    }
+
+    .login-box {
+        width: 400px;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1270px) {
+    .login-overlay {
+        width: 35vw;
+    }
+
+    .login-box {
+        width: 35vw;
+    }
+}
+
+@media (max-width: 991px) {
+    .login-overlay {
+        width: 92vw;
+    }
+
+    .login-box {
+        width: 92vw;
+    }
 }

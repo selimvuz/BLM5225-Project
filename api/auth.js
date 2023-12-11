@@ -3,35 +3,26 @@ const sqlite3 = require('sqlite3');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const authenticateToken = require('./token');
 
-const app = express();
-const port = 3000;
+const authRoutes = express();
 
-// Connect to SQLite database
 const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com/selimvuz/BLM5225-Project/database/car.db');
 
-app.use(express.json());
+authRoutes.use(express.json());
+authRoutes.use(cors({ origin: 'http://localhost:3000' }));
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+// Use a static secret key for signing and verifying tokens
+const secretKey = "ye8zua@8294%qiwommqhfrlu0s7s)be1@-2+9$g$0+3w9i@r3f";
 
-// Sample user registration endpoint
-app.post('/register', async (req, res) => {
-    const { email, password } = req.body;
-
-    // Hash the password before storing it in the database
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Save user data to the database
-    db.run('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], (err) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error registering user' });
-        }
-        res.status(200).json({ message: 'User registered successfully' });
-    });
-});
+const generateToken = (user) => {
+    // Generate a JWT token with the static key
+    const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: '1h' });
+    return token;
+};
 
 // Sample login endpoint
-app.post('/login', async (req, res) => {
+authRoutes.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     // Retrieve user data from the database
@@ -51,11 +42,36 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Generate a JWT token
-        const token = jwt.sign({ userId: user.id, email: user.email }, 'your-secret-key', { expiresIn: '1h' });
+        // Generate a JWT token with the static key
+        const token = generateToken(user);
 
         res.status(200).json({ token });
     });
 });
 
-module.exports = app;
+// Sample register endpoint
+authRoutes.post('/register', async (req, res) => {
+    const { email, password } = req.body;
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the user into the database
+    db.run('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], (err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error inserting user' });
+        }
+
+
+        res.status(200).json({ message: 'User created' });
+    });
+});
+
+authRoutes.post('/validateToken', authenticateToken, (req, res) => {
+    // If the middleware passes, the token is valid
+    res.status(200).json({ message: 'Token is valid' });
+});
+
+module.exports = {
+    authRoutes
+};

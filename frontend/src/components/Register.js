@@ -22,8 +22,7 @@ function Register() {
             if (response.ok) {
                 // Login successful
                 setRegisterStatus({ type: 'success', message: 'Kayıt başarılı' });
-
-                // You may want to redirect or perform additional actions here
+                window.location.reload();
             } else {
                 // Login failed
                 setRegisterStatus({ type: 'warning', message: 'Kayıt başarısız' });

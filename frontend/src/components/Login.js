@@ -20,10 +20,14 @@ function Login() {
             });
 
             if (response.ok) {
+                const data = await response.json();
+
                 // Login successful
                 setLoginStatus({ type: 'success', message: 'Giriş başarılı' });
 
-                // You may want to redirect or perform additional actions here
+                // Set the token in local storage
+                localStorage.setItem('authToken', data.token);
+                window.location.reload();
             } else {
                 // Login failed
                 setLoginStatus({ type: 'warning', message: 'Giriş başarısız' });

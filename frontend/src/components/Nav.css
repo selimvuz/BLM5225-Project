@@ -5,3 +5,9 @@
 .bs-body-color.navbar.navbar-expand-lg.navbar-light {
     background-color: #D1E7DD !important;
 }
+
+.nav-dropdown-item:focus,
+.nav-dropdown-item:active {
+    background-color: #D1E7DD !important;
+    color: black !important;
+}

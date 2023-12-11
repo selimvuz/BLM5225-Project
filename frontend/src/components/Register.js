@@ -1,11 +1,11 @@
 import { Form, Button } from 'react-bootstrap';
-import "./Login.css";
+import "./Register.css";
 
-function Login() {
+function Register() {
     return (
         <div>
-            <div className="login-overlay" onClick={(e) => e.stopPropagation()}>
-                <div className="login-box">
+            <div className="register-overlay" onClick={(e) => e.stopPropagation()}>
+                <div className="register-box">
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email</Form.Label>
@@ -23,7 +23,7 @@ function Login() {
                             <Form.Check className="checkB" type="checkbox" label="Beni hatırla" />
                         </Form.Group>
                         <Button style={{ backgroundColor: '#D1E7DD', color: 'black' }} variant="primary" type="submit">
-                            Giriş
+                            Kayıt
                         </Button>
                     </Form>
                 </div>
@@ -32,4 +32,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;

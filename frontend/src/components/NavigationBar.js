@@ -7,10 +7,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./Nav.css";
 import React, { useState, useEffect } from 'react';
 import Login from './Login';
+import Register from './Register';
 
 function NavigationBar() {
     const [showLoginBox, setShowLoginBox] = useState(false);
     const [loginBoxPosition, setLoginBoxPosition] = useState({ top: 0, left: 0 });
+    const [showRegisterBox, setShowRegisterBox] = useState(false);
+    const [registerBoxPosition, setRegisterBoxPosition] = useState({ top: 0, left: 0 });
 
     const handleLoginClick = (e) => {
         e.stopPropagation();
@@ -24,6 +27,19 @@ function NavigationBar() {
         setShowLoginBox(!showLoginBox);
     };
 
+    const handleLoginClickRegister = (e) => {
+        e.stopPropagation();
+        const dropdownButton = e.currentTarget;
+        const rect = dropdownButton.getBoundingClientRect();
+        const position = {
+            top: rect.bottom + window.scrollY,
+            left: rect.left + window.scrollX,
+        };
+        setRegisterBoxPosition(position);
+        setShowRegisterBox(!showRegisterBox);
+
+    }
+
     useEffect(() => {
         const closeLoginBox = () => {
             setShowLoginBox(false);
@@ -35,6 +51,20 @@ function NavigationBar() {
         // Remove the event listener when the component unmounts
         return () => {
             document.body.removeEventListener('click', closeLoginBox);
+        };
+    }, []);
+
+    useEffect(() => {
+        const closeRegisterBox = () => {
+            setShowRegisterBox(false);
+        };
+
+        // Add event listener to close the login box when clicking outside
+        document.body.addEventListener('click', closeRegisterBox);
+
+        // Remove the event listener when the component unmounts
+        return () => {
+            document.body.removeEventListener('click', closeRegisterBox);
         };
     }, []);
 
@@ -53,7 +83,7 @@ function NavigationBar() {
                             <Nav.Link href="#action1" className='text-dark'>Ana Sayfa</Nav.Link>
                             <Nav.Link href="#action2" className='text-dark'>Yeni Veri</Nav.Link>
                             <NavDropdown style={{ color: 'white' }} title="Kullanıcı" id="navbarScrollingDropdown">
-                                <NavDropdown.Item onClick={handleLoginClick}>
+                                <NavDropdown.Item className="nav-dropdown-item" onClick={handleLoginClick}>
                                     Giriş Yap
                                 </NavDropdown.Item>
                                 {showLoginBox && (
@@ -67,6 +97,23 @@ function NavigationBar() {
                                     >
                                         <div>
                                             <Login />
+                                        </div>
+                                    </div>
+                                )}
+                                <NavDropdown.Item className="nav-dropdown-item" onClick={handleLoginClickRegister}>
+                                    Kayıt Ol
+                                </NavDropdown.Item>
+                                {showRegisterBox && (
+                                    <div
+                                        className="register-overlay"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setShowRegisterBox(false);
+                                        }}
+                                        style={{ top: registerBoxPosition.top, left: registerBoxPosition.left }}
+                                    >
+                                        <div>
+                                            <Register />
                                         </div>
                                     </div>
                                 )}

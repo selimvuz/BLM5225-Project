@@ -14,6 +14,54 @@ function NavigationBar() {
     const [loginBoxPosition, setLoginBoxPosition] = useState({ top: 0, left: 0 });
     const [showRegisterBox, setShowRegisterBox] = useState(false);
     const [registerBoxPosition, setRegisterBoxPosition] = useState({ top: 0, left: 0 });
+    const authToken = localStorage.getItem('authToken');
+    const [authenticated, setAuthenticated] = useState(false);
+
+    function clearJwt() {
+        localStorage.removeItem('authToken');
+    }
+
+    function reloadPage() {
+        window.location.reload();
+    }
+
+    function logout() {
+        clearJwt();
+        reloadPage();
+    }
+
+    useEffect(() => {
+        const validateToken = async () => {
+            try {
+                if (authToken) {
+                    // Send the token to the server for validation
+                    const response = await fetch('http://localhost:3001/auth/validateToken', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                    });
+
+                    if (response.ok) {
+                        // Token is valid
+                        setAuthenticated(true);
+                    } else {
+                        // Token is invalid or expired
+                        setAuthenticated(false);
+                    }
+                } else {
+                    // No token found, user is not authenticated
+                    setAuthenticated(false);
+                }
+            } catch (error) {
+                console.error('Error validating token:', error);
+                setAuthenticated(false);
+            }
+        };
+
+        validateToken();
+    }, []);
 
     const handleLoginClick = (e) => {
         e.stopPropagation();
@@ -104,6 +152,12 @@ function NavigationBar() {
                                 <NavDropdown.Item className="nav-dropdown-item" onClick={handleLoginClickRegister}>
                                     Kayıt Ol
                                 </NavDropdown.Item>
+                                {authenticated ? (
+                                    <NavDropdown.Item className="nav-dropdown-item" onClick={logout}>
+                                        Çıkış Yap
+                                    </NavDropdown.Item>
+                                ) : null
+                                }
                                 {showRegisterBox && (
                                     <div
                                         className="register-overlay"

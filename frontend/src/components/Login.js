@@ -27,7 +27,7 @@ function Login() {
 
                 // Set the token in local storage
                 localStorage.setItem('authToken', data.token);
-                window.location.reload();
+                setTimeout(() => { window.location.reload(); }, 1000);
             } else {
                 // Login failed
                 setLoginStatus({ type: 'warning', message: 'Giriş başarısız' });

@@ -26,7 +26,6 @@ function DBTable() {
                     if (response.ok) {
                         // Token is valid
                         setAuthenticated(true);
-                        console.log("Token is valid");
                     } else {
                         // Token is invalid or expired
                         setAuthenticated(false);

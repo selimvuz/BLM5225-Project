@@ -34,14 +34,14 @@ In a new terminal, go to the `frontend` directory and start the React applicatio
 - **Search Functionality:** Perform search operations within the tables.
 
 ## Technologies Used
-- **Frontend:**
+### **Frontend:**
 - React 18
 - React Bootstrap
 - Google Font API
-- **Backend:**
+### **Backend:**
 - Node.js
 - Express.js
-- **Database:**
+### **Database:**
 - SQLite
 
 ## Contributing

@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { LinkContainer } from 'react-router-bootstrap';
 import "./Nav.css";
 import React, { useState, useEffect } from 'react';
 import Login from './Login';
@@ -129,8 +130,12 @@ function NavigationBar() {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="#action1" className='text-dark'>Ana Sayfa</Nav.Link>
-                            <Nav.Link href="#action2" className='text-dark'>Yeni Veri</Nav.Link>
+                            <LinkContainer to="/">
+                                <Nav.Link className='text-dark'>Ana Sayfa</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/data">
+                                <Nav.Link className='text-dark'>Yeni Veri</Nav.Link>
+                            </LinkContainer>
                             <NavDropdown style={{ color: 'white' }} title="Kullanıcı" id="navbarScrollingDropdown">
                                 <NavDropdown.Item className="nav-dropdown-item" onClick={handleLoginClick}>
                                     Giriş Yap
@@ -173,9 +178,9 @@ function NavigationBar() {
                                     </div>
                                 )}
                             </NavDropdown>
-                            <Nav.Link href="#" disabled className='text-dark'>
-                                Proje Hakkında
-                            </Nav.Link>
+                            <LinkContainer to="/about">
+                                <Nav.Link className='text-dark'>Proje Hakkında</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                         <Form className="d-flex">
                             <Form.Control

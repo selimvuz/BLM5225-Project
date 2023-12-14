@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import "./Nav.css";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Login from './Login';
 import Register from './Register';
 
@@ -17,6 +17,50 @@ function NavigationBar() {
     const [registerBoxPosition, setRegisterBoxPosition] = useState({ top: 0, left: 0 });
     const authToken = localStorage.getItem('authToken');
     const [authenticated, setAuthenticated] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]); // State to store search results
+    const searchBoxRef = useRef(null);
+    const [searchResultsStyle, setSearchResultsStyle] = useState({});
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:3001/search/search?query=${encodeURIComponent(searchTerm)}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const text = await response.text();
+            try {
+                const data = JSON.parse(text);
+                setSearchResults(data);
+            } catch (jsonError) {
+                console.error('Error parsing JSON:', jsonError, 'Response:', text);
+            }
+        } catch (error) {
+            console.error('Search error:', error);
+            setSearchResults([]);
+        }
+
+        if (searchBoxRef.current) {
+            const rect = searchBoxRef.current.getBoundingClientRect();
+            setSearchResultsStyle({
+                top: `${rect.bottom + window.scrollY}px`,
+                left: `${rect.left + window.scrollX}px`,
+                width: `${rect.width}px`
+            });
+        }
+    };
 
     function clearJwt() {
         localStorage.removeItem('authToken');
@@ -62,7 +106,7 @@ function NavigationBar() {
         };
 
         validateToken();
-    }, []);
+    }, [authToken]);
 
     const handleLoginClick = (e) => {
         e.stopPropagation();
@@ -182,18 +226,30 @@ function NavigationBar() {
                                 <Nav.Link className='text-dark'>Proje Hakkında</Nav.Link>
                             </LinkContainer>
                         </Nav>
-                        <Form className="d-flex">
+                        <Form className="d-flex" onSubmit={handleSearchSubmit}>
                             <Form.Control
                                 type="search"
+                                ref={searchBoxRef}
                                 placeholder="Arama"
                                 className="me-2"
                                 aria-label="Arama"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
                             />
-                            <Button variant="outline-success">Ara</Button>
+                            <Button variant="outline-success" type="submit">Ara</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            {searchResults.length > 0 && (
+                <div className="search-results-container" style={searchResultsStyle}>
+                    {searchResults.map((result, index) => (
+                        <div key={index} className="search-result-row">
+                            <p className='searchText'>{result.ModelName}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

@@ -3,7 +3,7 @@ import "./Text.css";
 
 const Data = () => {
     return (
-        <div>
+        <div className='container'>
             <h1>Yeni Veri</h1>
             <p>This page provides information about our application and team.</p>
             {/* Additional about information goes here */}

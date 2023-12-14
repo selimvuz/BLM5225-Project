@@ -1,1 +1,3 @@
-SELECT * FROM users;
+SELECT *
+FROM Model
+WHERE ModelName LIKE '%Corolla%'

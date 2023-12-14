@@ -1,5 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import React, { useState, useEffect } from 'react';
+import './Text.css';
 
 function DBTable() {
     const authToken = localStorage.getItem('authToken');
@@ -41,7 +42,7 @@ function DBTable() {
         };
 
         validateToken();
-    }, []);
+    }, [authToken]);
 
     useEffect(() => {
         // Fetch data from your server only when authenticated
@@ -118,7 +119,7 @@ function DBTable() {
     };
 
     const tableContainerStyle = {
-        margin: '7em 10em 50px 10em',
+        margin: '3em 10em 50px 10em',
     };
 
     const tableStyle = {
@@ -128,101 +129,105 @@ function DBTable() {
     };
 
     return (
-        <div style={tableContainerStyle}>
+        <div>
             {authenticated ? (
-                <div className='row'>
-                    <div className='col-md-6'>
-                        <div style={tableStyle}>
-                            <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
-                                <thead className='table-success'>
-                                    <tr>
-                                        <th>Model ID</th>
-                                        <th>Model</th>
-                                        <th>Marka ID</th>
-                                        <th>Marka</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table-light">
-                                    {tableData.map((row, index) => (
-                                        <tr key={index}>
-                                            <td>{row.ModelID}</td>
-                                            <td>{row.ModelName}</td>
-                                            <td>{row.BrandID}</td>
-                                            <td>{row.BrandName}</td>
+                <h1>Tablolar</h1>) : null}
+            <div style={tableContainerStyle}>
+                {authenticated ? (
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <div style={tableStyle}>
+                                <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
+                                    <thead className='table-success'>
+                                        <tr>
+                                            <th>Model ID</th>
+                                            <th>Model</th>
+                                            <th>Marka ID</th>
+                                            <th>Marka</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody className="table-light">
+                                        {tableData.map((row, index) => (
+                                            <tr key={index}>
+                                                <td>{row.ModelID}</td>
+                                                <td>{row.ModelName}</td>
+                                                <td>{row.BrandID}</td>
+                                                <td>{row.BrandName}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
+                            <div style={tableStyle}>
+                                <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
+                                    <thead className='table-success'>
+                                        <tr>
+                                            <th>Müşteri ID</th>
+                                            <th>Müşteri Adı</th>
+                                            <th>İletişim</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="table-light">
+                                        {tableDataTwo.map((row, index) => (
+                                            <tr key={index}>
+                                                <td>{row.CustomerID}</td>
+                                                <td>{row.CustomerName}</td>
+                                                <td>{row.ContactInfo}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
                         </div>
-                        <div style={tableStyle}>
-                            <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
-                                <thead className='table-success'>
-                                    <tr>
-                                        <th>Müşteri ID</th>
-                                        <th>Müşteri Adı</th>
-                                        <th>İletişim</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table-light">
-                                    {tableDataTwo.map((row, index) => (
-                                        <tr key={index}>
-                                            <td>{row.CustomerID}</td>
-                                            <td>{row.CustomerName}</td>
-                                            <td>{row.ContactInfo}</td>
+                        <div className='col-md-6'>
+                            <div style={tableStyle}>
+                                <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
+                                    <thead className='table-success'>
+                                        <tr>
+                                            <th>Satıcı ID</th>
+                                            <th>Satıcı Adı</th>
+                                            <th>Konum</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody className="table-light">
+                                        {tableDataThree.map((row, index) => (
+                                            <tr key={index}>
+                                                <td>{row.DealerID}</td>
+                                                <td>{row.DealerName}</td>
+                                                <td>{row.Location}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
+                            <div style={tableStyle}>
+                                <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
+                                    <thead className='table-success'>
+                                        <tr>
+                                            <th>Araç Numarası</th>
+                                            <th>Model ID</th>
+                                            <th>Satıcı ID</th>
+                                            <th>Müşteri ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="table-light">
+                                        {tableDataFour.map((row, index) => (
+                                            <tr key={index}>
+                                                <td>{row.VIN}</td>
+                                                <td>{row.ModelID}</td>
+                                                <td>{row.DealerID}</td>
+                                                <td>{row.CustomerID ? row.CustomerID : "Yok"}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
                         </div>
                     </div>
-                    <div className='col-md-6'>
-                        <div style={tableStyle}>
-                            <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
-                                <thead className='table-success'>
-                                    <tr>
-                                        <th>Satıcı ID</th>
-                                        <th>Satıcı Adı</th>
-                                        <th>Konum</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table-light">
-                                    {tableDataThree.map((row, index) => (
-                                        <tr key={index}>
-                                            <td>{row.DealerID}</td>
-                                            <td>{row.DealerName}</td>
-                                            <td>{row.Location}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                        </div>
-                        <div style={tableStyle}>
-                            <Table className="table table-hover" responsive="xl" style={{ marginBottom: '0' }}>
-                                <thead className='table-success'>
-                                    <tr>
-                                        <th>Araç Numarası</th>
-                                        <th>Model ID</th>
-                                        <th>Satıcı ID</th>
-                                        <th>Müşteri ID</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table-light">
-                                    {tableDataFour.map((row, index) => (
-                                        <tr key={index}>
-                                            <td>{row.VIN}</td>
-                                            <td>{row.ModelID}</td>
-                                            <td>{row.DealerID}</td>
-                                            <td>{row.CustomerID ? row.CustomerID : "Yok"}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                        </div>
-                    </div>
-                </div>
-            ) : (
-                <h1 style={{ color: '#D1E7DD' }}>Kullanıcı girişi gerekli.</h1>
-            )}
+                ) : (
+                    <h1 style={{ color: '#D1E7DD' }}>Kullanıcı girişi gerekli.</h1>
+                )}
+            </div>
         </div>
     );
 }

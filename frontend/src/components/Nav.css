@@ -11,3 +11,29 @@
     background-color: #D1E7DD !important;
     color: black !important;
 }
+
+.search-results-container {
+    position: absolute;
+    z-index: 1000;
+    background: #6acca0;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-row {
+    padding: 5px 10px;
+    border-bottom: 1px solid #1922a1;
+}
+
+/* Optionally, add hover effect for each row */
+.search-result-row:hover {
+    background-color: #212529;
+
+    .searchText {
+        color: white;
+    }
+}
+
+.searchText {
+    color: black;
+}

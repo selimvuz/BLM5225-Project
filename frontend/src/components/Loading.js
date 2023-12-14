@@ -1,49 +1,29 @@
 import './Loading.css'; // Import the CSS file with styles
 import { useState, useEffect } from 'react';
 
-const Loader = () => {
-    const [showLoader, setShowLoader] = useState(true);
+const Loader = ({ setIsLoading }) => {
+    const [showLoader, setShowLoader] = useState(true); // Local state to control visibility of the loader
 
     useEffect(() => {
-        // Set a timeout to hide the loader after 10 seconds
         const hideTimeoutId = setTimeout(() => {
-            setShowLoader(false);
+            setShowLoader(false); // Hide the loader
+            setIsLoading(false); // Notify App.js that loading is complete
         }, 2000);
 
-        // Clean up the timeouts when the component unmounts or when loader is hidden
         return () => {
             clearTimeout(hideTimeoutId);
         };
-    }, []); // Run this effect only once on mount
+    }, [setIsLoading]);
 
-    return (
-        <div>
-            {showLoader && (
-                <div className="loader">
-                    <span
-                        className="loader_dot"
-                        style={{ '--d': `200ms` }}
-                    ></span>
-                    <span
-                        className="loader_dot"
-                        style={{ '--d': `400ms` }}
-                    ></span>
-                    <span
-                        className="loader_dot"
-                        style={{ '--d': `600ms` }}
-                    ></span>
-                    <span
-                        className="loader_dot"
-                        style={{ '--d': `800ms` }}
-                    ></span>
-                    <span
-                        className="loader_dot"
-                        style={{ '--d': `1000ms` }}
-                    ></span>
-                </div>
-            )}
+    return showLoader ? (
+        <div className="loader">
+            <span className="loader_dot" style={{ '--d': `200ms` }}></span>
+            <span className="loader_dot" style={{ '--d': `400ms` }}></span>
+            <span className="loader_dot" style={{ '--d': `600ms` }}></span>
+            <span className="loader_dot" style={{ '--d': `800ms` }}></span>
+            <span className="loader_dot" style={{ '--d': `1000ms` }}></span>
         </div>
-    );
+    ) : null;
 };
 
 export default Loader;

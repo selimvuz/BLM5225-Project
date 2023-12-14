@@ -4,9 +4,9 @@
 This project is part of the MSC - Database Modeling and Design course for the 2023/2024 term. It's a comprehensive system that allows users to interact with a database through a web interface.
 
 ## Screenshots
-![Screenshot of Application](images/DBP-2.png)
-![Screenshot of Application](images/DBP-3.png)
 ![Screenshot of Application](images/DBP-4.png)
+![Screenshot of Application](images/DBP-3.png)
+![Screenshot of Application](images/DBP-2.png)
 
 ## Getting Started
 

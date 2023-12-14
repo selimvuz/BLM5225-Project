@@ -7,7 +7,7 @@ newData.use(cors()); // Enable CORS for all routes
 newData.use(express.json()); // Parse JSON bodies
 
 // Connect to your SQLite database
-const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com/selimvuz/BLM5225-Project/database/car.db', sqlite3.OPEN_READWRITE, (err) => {
+const db = new sqlite3.Database('./database/car.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
         console.error(err.message);
     }

@@ -6,7 +6,7 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 
 // Connect to your SQLite database
-const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com/selimvuz/BLM5225-Project/database/car.db');
+const db = new sqlite3.Database('./database/car.db');
 
 // Define an API endpoint to fetch data
 app.get('/api/data1', (req, res) => {

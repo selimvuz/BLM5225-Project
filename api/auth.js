@@ -7,7 +7,7 @@ const authenticateToken = require('./token');
 
 const authRoutes = express();
 
-const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com/selimvuz/BLM5225-Project/database/car.db');
+const db = new sqlite3.Database('./database/car.db');
 
 authRoutes.use(express.json());
 authRoutes.use(cors({ origin: 'http://localhost:3000' }));

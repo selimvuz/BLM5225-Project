@@ -6,6 +6,7 @@ DELETE FROM Customer;
 DELETE FROM Dealer;
 DELETE FROM Model;
 DELETE FROM Brand;
+DELETE FROM users;
 DROP TABLE Customer;
 DROP TABLE Dealer;
 DROP TABLE Model;

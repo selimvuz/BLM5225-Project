@@ -1,6 +1,6 @@
 CREATE TABLE Dealer
 (
-    DealerID INT PRIMARY KEY,
+    DealerID INTEGER PRIMARY KEY AUTOINCREMENT,
     DealerName VARCHAR(255),
     Location VARCHAR(255)
     -- other dealer attributes
@@ -8,7 +8,7 @@ CREATE TABLE Dealer
 
 CREATE TABLE Customer
 (
-    CustomerID INT PRIMARY KEY,
+    CustomerID INTEGER PRIMARY KEY AUTOINCREMENT,
     CustomerName VARCHAR(255),
     ContactInfo VARCHAR(255)
     -- other customer attributes
@@ -16,14 +16,14 @@ CREATE TABLE Customer
 
 CREATE TABLE Brand
 (
-    BrandID INT PRIMARY KEY,
+    BrandID INTEGER PRIMARY KEY AUTOINCREMENT,
     BrandName VARCHAR(255)
     -- other brand attributes
 );
 
 CREATE TABLE Model
 (
-    ModelID INT PRIMARY KEY,
+    ModelID INTEGER PRIMARY KEY AUTOINCREMENT,
     BrandID INT,
     ModelName VARCHAR(255),
     FOREIGN KEY (BrandID) REFERENCES Brand(BrandID)

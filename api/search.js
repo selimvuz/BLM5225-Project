@@ -10,7 +10,7 @@ const db = new sqlite3.Database('C:/Users/PC/Desktop/Klasor/workspace/github.com
     if (err) {
         console.error(err.message);
     }
-    console.log('Connected to the car database.');
+    console.log('Connected to the car database. 1');
 });
 
 searchRoutes.get('/search', (req, res) => {
@@ -21,7 +21,6 @@ searchRoutes.get('/search', (req, res) => {
             res.status(500).send('Server error');
             return;
         }
-        console.log(rows);
         res.json(rows);
     });
 });

@@ -14,6 +14,7 @@ function App() {
   return (
     <Router>
       <div className="App" style={{ height: '100vh' }}>
+        <canvas id="background-canvas"></canvas>
         <Loader setIsLoading={setIsLoading} />
         {!isLoading && (
           <>

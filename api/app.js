@@ -5,6 +5,7 @@ const databaseRoutes = require('./database');
 const searchRoutes = require('./search');
 const { authRoutes } = require('./auth');
 const authenticateToken = require('./token');
+const newData = require('./new_data');
 const port = 3001;
 
 const app = express();
@@ -15,13 +16,13 @@ app.use(bodyParser.json());
 // Authentication Routes
 app.use('/auth', authRoutes);
 
+app.use('/newData', newData);
+
 // Use the authenticateToken middleware for protecting /database routes
 app.use('/database', authenticateToken, databaseRoutes);
 
 // Use the authenticateToken middleware for protecting /search routes
-app.use('/search', authenticateToken, searchRoutes);
-
-// Other API Routes
+app.use('/data', authenticateToken, searchRoutes);
 
 // Start the server
 app.listen(port, () => {

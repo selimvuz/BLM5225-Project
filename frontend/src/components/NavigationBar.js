@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import "./Nav.css";
 import React, { useState, useEffect, useRef } from 'react';
@@ -21,6 +22,41 @@ function NavigationBar() {
     const [searchResults, setSearchResults] = useState([]); // State to store search results
     const searchBoxRef = useRef(null);
     const [searchResultsStyle, setSearchResultsStyle] = useState({});
+    const searchResultsRef = useRef(null);
+    const [showTooltip, setShowTooltip] = useState(false);
+
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            Arama fonksiyonunu kullanabilmek için lütfen giriş yapın.
+        </Tooltip>
+    );
+
+    useEffect(() => {
+        if (!authenticated) {
+            // Delay showing the tooltip until after the component has rendered
+            const timer = setTimeout(() => {
+                setShowTooltip(true);
+            }, 1000); // Adjust time as needed
+
+            return () => clearTimeout(timer);
+        }
+    }, [authenticated]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchResultsRef.current && !searchResultsRef.current.contains(event.target)) {
+                setSearchResults([]); // This clears the search results, effectively hiding them
+            }
+        };
+
+        // Attach the event listener
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            // Clean up the event listener
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [searchResultsRef]);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -29,7 +65,7 @@ function NavigationBar() {
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3001/search/search?query=${encodeURIComponent(searchTerm)}`, {
+            const response = await fetch(`http://localhost:3001/data/search?query=${encodeURIComponent(searchTerm)}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -178,7 +214,7 @@ function NavigationBar() {
                                 <Nav.Link className='text-dark'>Ana Sayfa</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="/data">
-                                <Nav.Link className='text-dark'>Yeni Veri</Nav.Link>
+                                <Nav.Link className='text-dark'>Veri Ekle</Nav.Link>
                             </LinkContainer>
                             <NavDropdown style={{ color: 'white' }} title="Kullanıcı" id="navbarScrollingDropdown">
                                 <NavDropdown.Item className="nav-dropdown-item" onClick={handleLoginClick}>
@@ -227,30 +263,40 @@ function NavigationBar() {
                             </LinkContainer>
                         </Nav>
                         <Form className="d-flex" onSubmit={handleSearchSubmit}>
-                            <Form.Control
-                                type="search"
-                                ref={searchBoxRef}
-                                placeholder="Arama"
-                                className="me-2"
-                                aria-label="Arama"
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                            />
+                            <OverlayTrigger
+                                placement="bottom"
+                                overlay={renderTooltip}
+                                show={!authenticated && showTooltip}
+                            >
+                                <Form.Control
+                                    type="search"
+                                    ref={searchBoxRef}
+                                    placeholder="Model Ara"
+                                    className="me-2"
+                                    aria-label="Arama"
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    disabled={!authenticated}
+                                />
+                            </OverlayTrigger>
                             <Button variant="outline-success" type="submit">Ara</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
             {searchResults.length > 0 && (
-                <div className="search-results-container" style={searchResultsStyle}>
-                    {searchResults.map((result, index) => (
-                        <div key={index} className="search-result-row">
-                            <p className='searchText'>{result.ModelName}</p>
-                        </div>
-                    ))}
+                <div className="search-results-container" style={searchResultsStyle} ref={searchResultsRef}>
+                    {
+                        searchResults.slice(0, 10).map((result, index) => ( // Only take the first 5 results
+                            <div key={index} className="search-result-row">
+                                <p className='searchText'>{result.ModelName}</p>
+                            </div>
+                        ))
+                    }
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
 

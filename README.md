@@ -19,13 +19,13 @@ To get the application up and running, follow these steps:
 
 1. **Start the Backend Server:**
    Navigate to the `api` directory and run the `app.js` file.
-    cd api
-    node app.js
+    - `cd api`
+    - `node app.js`
 
 2. **Start the Frontend Application:**
 In a new terminal, go to the `frontend` directory and start the React application.
-    cd frontend
-    npm start
+    - `cd frontend`
+    - `npm start`
 
 ## Features
 - **User Authentication:** Register and log in to the system.
